@@ -1,0 +1,52 @@
+/* 
+Archivo de estilos de la plataforma de perfil profesional
+Aquí definimos cómo se verá la página: colores, márgenes y tipografía
+*/
+
+/* Estilo general del cuerpo de la página */
+body {
+
+    /* Tipo de letra sencillo y fácil de leer */
+    font-family: Arial, sans-serif;
+
+    /* Eliminamos márgenes que el navegador agrega por defecto */
+    margin: 0;
+
+    /* Color de fondo suave */
+    background-color: #f4f4f4;
+
+}
+
+/* Estilo del encabezado principal */
+header {
+
+    /* Color de fondo del encabezado */
+    background-color: #2f7d32;
+
+    /* Color del texto */
+    color: white;
+
+    /* Espacio interno */
+    padding: 20px;
+
+    /* Centra el contenido */
+    text-align: center;
+
+}
+
+/* Estilo de las secciones del contenido */
+section {
+
+    /* Fondo blanco para diferenciar del fondo general */
+    background-color: white;
+
+    /* Espacio interno */
+    padding: 20px;
+
+    /* Espacio exterior entre secciones */
+    margin: 20px;
+
+    /* Bordes ligeramente redondeados */
+    border-radius: 8px;
+
+}
