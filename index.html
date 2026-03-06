@@ -44,8 +44,28 @@
 <!-- Título de la sección -->
 <h2>Proyectos</h2>
 
-<!-- Texto temporal mientras desarrollamos la funcionalidad -->
-<p>Aquí aparecerán los proyectos desarrollados.</p>
+<!-- 
+Formulario sencillo para registrar un nuevo proyecto.
+El usuario podrá escribir el nombre y la descripción.
+-->
+
+<input type="text" id="nombreProyecto" placeholder="Nombre del proyecto">
+
+<br><br>
+
+<textarea id="descripcionProyecto" placeholder="Descripción del proyecto"></textarea>
+
+<br><br>
+
+<!-- Botón para guardar el proyecto -->
+<button onclick="agregarProyecto()">Agregar proyecto</button>
+
+<hr>
+
+<!-- 
+Aquí aparecerá la lista de proyectos que el usuario registre
+-->
+<div id="listaProyectos"></div>
 
 </section>
 
