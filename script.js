@@ -1,10 +1,11 @@
 /*
 Sistema de gestión de proyectos con LocalStorage
+Versión estable y robusta (manipulación directa del DOM)
 */
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    console.log("Sistema cargado");
+    console.log("Sistema cargado correctamente");
 
     mostrarProyectos();
 
@@ -55,22 +56,31 @@ function mostrarProyectos() {
 
     lista.innerHTML = "";
 
-    let proyectosGuardados = localStorage.getItem("proyectos");
-
-    if(!proyectosGuardados) return;
-
-    let proyectos = JSON.parse(proyectosGuardados);
+    let proyectos = JSON.parse(localStorage.getItem("proyectos")) || [];
 
     proyectos.forEach(function(proyecto, index) {
 
         let div = document.createElement("div");
 
-        div.innerHTML = `
-            <h3>${proyecto.nombre}</h3>
-            <p>${proyecto.descripcion}</p>
-            <button onclick="eliminarProyecto(${index})">Eliminar</button>
-            <hr>
-        `;
+        let titulo = document.createElement("h3");
+        titulo.textContent = proyecto.nombre;
+
+        let descripcion = document.createElement("p");
+        descripcion.textContent = proyecto.descripcion;
+
+        let botonEliminar = document.createElement("button");
+        botonEliminar.textContent = "Eliminar";
+
+        botonEliminar.addEventListener("click", function() {
+            eliminarProyecto(index);
+        });
+
+        let separador = document.createElement("hr");
+
+        div.appendChild(titulo);
+        div.appendChild(descripcion);
+        div.appendChild(botonEliminar);
+        div.appendChild(separador);
 
         lista.appendChild(div);
 
