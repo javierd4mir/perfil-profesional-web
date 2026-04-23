@@ -4,14 +4,18 @@ Sistema de gestión de proyectos con persistencia en LocalStorage
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    // Cargar proyectos guardados al iniciar la página
+    console.log("Sistema cargado");
+
+    // Ver qué hay en LocalStorage
+    console.log(localStorage.getItem("proyectos"));
+
     mostrarProyectos();
 
-    // Evento del botón
     const boton = document.getElementById("btnAgregar");
     boton.addEventListener("click", agregarProyecto);
 
 });
+
 
 /*
 Función para agregar un proyecto
