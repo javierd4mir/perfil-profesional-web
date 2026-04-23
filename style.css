@@ -1,52 +1,89 @@
-/* 
-Archivo de estilos de la plataforma de perfil profesional
-Aquí definimos cómo se verá la página: colores, márgenes y tipografía
-*/
-
-/* Estilo general del cuerpo de la página */
+/* Estilo general */
 body {
-
-    /* Tipo de letra sencillo y fácil de leer */
-    font-family: Arial, sans-serif;
-
-    /* Eliminamos márgenes que el navegador agrega por defecto */
+    font-family: 'Segoe UI', Tahoma, sans-serif;
     margin: 0;
-
-    /* Color de fondo suave */
-    background-color: #f4f4f4;
-
+    background-color: #f5f7fa;
+    color: #333;
 }
 
-/* Estilo del encabezado principal */
+/* Encabezado */
 header {
-
-    /* Color de fondo del encabezado */
-    background-color: #2f7d32;
-
-    /* Color del texto */
+    background: linear-gradient(135deg, #2f7d32, #1b5e20);
     color: white;
-
-    /* Espacio interno */
-    padding: 20px;
-
-    /* Centra el contenido */
+    padding: 30px 20px;
     text-align: center;
-
 }
 
-/* Estilo de las secciones del contenido */
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin-top: 8px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Secciones tipo tarjeta */
 section {
-
-    /* Fondo blanco para diferenciar del fondo general */
     background-color: white;
+    padding: 25px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
 
-    /* Espacio interno */
-    padding: 20px;
+/* Inputs */
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
 
-    /* Espacio exterior entre secciones */
-    margin: 20px;
+/* Botón principal */
+button {
+    padding: 10px 18px;
+    background-color: #2f7d32;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
 
-    /* Bordes ligeramente redondeados */
+/* Hover elegante */
+button:hover {
+    background-color: #256428;
+    transform: scale(1.03);
+}
+
+/* Tarjetas de proyectos */
+#listaProyectos div {
+    background: #f9fafb;
+    padding: 15px;
     border-radius: 8px;
+    margin-top: 15px;
+    border-left: 4px solid #2f7d32;
+}
 
+/* Título del proyecto */
+#listaProyectos h3 {
+    margin: 0;
+}
+
+/* Botón eliminar más discreto */
+#listaProyectos button {
+    margin-top: 10px;
+    background-color: #c62828;
+}
+
+#listaProyectos button:hover {
+    background-color: #9e1c1c;
 }
