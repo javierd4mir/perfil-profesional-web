@@ -1,13 +1,10 @@
 /*
-Sistema de gestión de proyectos con persistencia en LocalStorage
+Sistema de gestión de proyectos con LocalStorage
 */
 
 document.addEventListener("DOMContentLoaded", function() {
 
     console.log("Sistema cargado");
-
-    // Ver qué hay en LocalStorage
-    console.log(localStorage.getItem("proyectos"));
 
     mostrarProyectos();
 
@@ -16,9 +13,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-
 /*
-Función para agregar un proyecto
+Agregar proyecto
 */
 function agregarProyecto() {
 
@@ -30,67 +26,69 @@ function agregarProyecto() {
         return;
     }
 
-    // Crear objeto proyecto
     let proyecto = {
         nombre: nombre,
         descripcion: descripcion
     };
 
-    // Obtener proyectos existentes o iniciar arreglo vacío
     let proyectos = JSON.parse(localStorage.getItem("proyectos")) || [];
 
-    // Agregar nuevo proyecto
     proyectos.push(proyecto);
 
-    // Guardar en LocalStorage
     localStorage.setItem("proyectos", JSON.stringify(proyectos));
 
-    // Limpiar campos
     document.getElementById("nombreProyecto").value = "";
     document.getElementById("descripcionProyecto").value = "";
 
-    // Actualizar vista
     mostrarProyectos();
 
 }
 
 /*
-Función para mostrar los proyectos en pantalla
+Mostrar proyectos
 */
 function mostrarProyectos() {
 
     let lista = document.getElementById("listaProyectos");
 
-    // Validar que el contenedor exista
-    if(!lista) {
-        console.error("No se encontró el contenedor de proyectos");
-        return;
-    }
+    if(!lista) return;
 
-    // Limpiar contenido antes de renderizar
     lista.innerHTML = "";
 
     let proyectosGuardados = localStorage.getItem("proyectos");
 
-    // Si no hay nada guardado, salir
-    if(!proyectosGuardados) {
-        return;
-    }
+    if(!proyectosGuardados) return;
 
     let proyectos = JSON.parse(proyectosGuardados);
 
-    proyectos.forEach(function(proyecto) {
+    proyectos.forEach(function(proyecto, index) {
 
         let div = document.createElement("div");
 
         div.innerHTML = `
             <h3>${proyecto.nombre}</h3>
             <p>${proyecto.descripcion}</p>
+            <button onclick="eliminarProyecto(${index})">Eliminar</button>
             <hr>
         `;
 
         lista.appendChild(div);
 
     });
+
+}
+
+/*
+Eliminar proyecto
+*/
+function eliminarProyecto(index) {
+
+    let proyectos = JSON.parse(localStorage.getItem("proyectos")) || [];
+
+    proyectos.splice(index, 1);
+
+    localStorage.setItem("proyectos", JSON.stringify(proyectos));
+
+    mostrarProyectos();
 
 }
