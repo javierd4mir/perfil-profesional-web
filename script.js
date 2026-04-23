@@ -1,20 +1,20 @@
 /*
-Control principal del sistema
-Se asegura que todo el HTML esté cargado antes de ejecutar código
+Sistema de gestión de proyectos con persistencia en LocalStorage
 */
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    // Referencia al botón
-    const boton = document.getElementById("btnAgregar");
+    // Cargar proyectos guardados al iniciar la página
+    mostrarProyectos();
 
-    // Evento cuando el usuario hace clic
+    // Evento del botón
+    const boton = document.getElementById("btnAgregar");
     boton.addEventListener("click", agregarProyecto);
 
 });
 
 /*
-Función que registra un proyecto y lo muestra en pantalla
+Función para agregar un proyecto
 */
 function agregarProyecto() {
 
@@ -26,18 +26,54 @@ function agregarProyecto() {
         return;
     }
 
-    let proyecto = document.createElement("div");
+    // Crear objeto proyecto
+    let proyecto = {
+        nombre: nombre,
+        descripcion: descripcion
+    };
 
-    proyecto.innerHTML = `
-        <h3>${nombre}</h3>
-        <p>${descripcion}</p>
-        <hr>
-    `;
+    // Obtener proyectos existentes o iniciar arreglo vacío
+    let proyectos = JSON.parse(localStorage.getItem("proyectos")) || [];
 
-    document.getElementById("listaProyectos").appendChild(proyecto);
+    // Agregar nuevo proyecto
+    proyectos.push(proyecto);
+
+    // Guardar en LocalStorage
+    localStorage.setItem("proyectos", JSON.stringify(proyectos));
 
     // Limpiar campos
     document.getElementById("nombreProyecto").value = "";
     document.getElementById("descripcionProyecto").value = "";
+
+    // Actualizar vista
+    mostrarProyectos();
+
+}
+
+/*
+Función para mostrar los proyectos en pantalla
+*/
+function mostrarProyectos() {
+
+    let lista = document.getElementById("listaProyectos");
+
+    // Limpiar contenido antes de volver a renderizar
+    lista.innerHTML = "";
+
+    let proyectos = JSON.parse(localStorage.getItem("proyectos")) || [];
+
+    proyectos.forEach(function(proyecto) {
+
+        let div = document.createElement("div");
+
+        div.innerHTML = `
+            <h3>${proyecto.nombre}</h3>
+            <p>${proyecto.descripcion}</p>
+            <hr>
+        `;
+
+        lista.appendChild(div);
+
+    });
 
 }
