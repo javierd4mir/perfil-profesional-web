@@ -61,10 +61,23 @@ function mostrarProyectos() {
 
     let lista = document.getElementById("listaProyectos");
 
-    // Limpiar contenido antes de volver a renderizar
+    // Validar que el contenedor exista
+    if(!lista) {
+        console.error("No se encontró el contenedor de proyectos");
+        return;
+    }
+
+    // Limpiar contenido antes de renderizar
     lista.innerHTML = "";
 
-    let proyectos = JSON.parse(localStorage.getItem("proyectos")) || [];
+    let proyectosGuardados = localStorage.getItem("proyectos");
+
+    // Si no hay nada guardado, salir
+    if(!proyectosGuardados) {
+        return;
+    }
+
+    let proyectos = JSON.parse(proyectosGuardados);
 
     proyectos.forEach(function(proyecto) {
 
