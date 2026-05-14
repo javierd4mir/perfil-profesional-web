@@ -1,11 +1,9 @@
 /*
-Sistema de gestión de proyectos con LocalStorage
-Versión estable y robusta (manipulación directa del DOM)
+Sistema de gestión de proyectos
+Versión mejorada con tecnologías y ordenamiento
 */
 
 document.addEventListener("DOMContentLoaded", function() {
-
-    console.log("Sistema cargado correctamente");
 
     mostrarProyectos();
 
@@ -21,15 +19,18 @@ function agregarProyecto() {
 
     let nombre = document.getElementById("nombreProyecto").value;
     let descripcion = document.getElementById("descripcionProyecto").value;
+    let tecnologias = document.getElementById("tecnologiasProyecto").value;
 
-    if(nombre === "" || descripcion === "") {
+    if(nombre === "" || descripcion === "" || tecnologias === "") {
         alert("Por favor completa todos los campos.");
         return;
     }
 
     let proyecto = {
         nombre: nombre,
-        descripcion: descripcion
+        descripcion: descripcion,
+        tecnologias: tecnologias,
+        fecha: new Date().getTime()
     };
 
     let proyectos = JSON.parse(localStorage.getItem("proyectos")) || [];
@@ -40,13 +41,14 @@ function agregarProyecto() {
 
     document.getElementById("nombreProyecto").value = "";
     document.getElementById("descripcionProyecto").value = "";
+    document.getElementById("tecnologiasProyecto").value = "";
 
     mostrarProyectos();
 
 }
 
 /*
-Mostrar proyectos
+Mostrar proyectos ordenados
 */
 function mostrarProyectos() {
 
@@ -58,6 +60,11 @@ function mostrarProyectos() {
 
     let proyectos = JSON.parse(localStorage.getItem("proyectos")) || [];
 
+    /*
+    Ordenar del más reciente al más antiguo
+    */
+    proyectos.sort((a, b) => b.fecha - a.fecha);
+
     proyectos.forEach(function(proyecto, index) {
 
         let div = document.createElement("div");
@@ -68,6 +75,9 @@ function mostrarProyectos() {
         let descripcion = document.createElement("p");
         descripcion.textContent = proyecto.descripcion;
 
+        let tecnologias = document.createElement("p");
+        tecnologias.innerHTML = "<strong>Tecnologías:</strong> " + proyecto.tecnologias;
+
         let botonEliminar = document.createElement("button");
         botonEliminar.textContent = "Eliminar";
 
@@ -75,12 +85,10 @@ function mostrarProyectos() {
             eliminarProyecto(index);
         });
 
-        let separador = document.createElement("hr");
-
         div.appendChild(titulo);
         div.appendChild(descripcion);
+        div.appendChild(tecnologias);
         div.appendChild(botonEliminar);
-        div.appendChild(separador);
 
         lista.appendChild(div);
 
